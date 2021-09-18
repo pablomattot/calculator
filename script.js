@@ -33,17 +33,32 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const displayValue = document.querySelector("#display");
 
+let action = "";
+let temporaryStorage = "";
+let numberArray = [];
+
 
 numbers.forEach(number => {
-    number.addEventListener('click', number => getInput(number));
+    number.addEventListener('click', number => {
+        getInput(number);
+        temporaryStorage = number.target.textContent;
+    });
 });
 
 operators.forEach(operator => {
-    operator.addEventListener('click', operator => getInput(operator));
+    operator.addEventListener('click', operator => {
+        getInput(operator);
+        storeNumber();
+    });
 });
 
 function getInput(key) {
     displayValue.textContent += `${key.target.textContent}`;
+}
+
+function storeNumber() {
+    numberArray.push(temporaryStorage);
+    temporaryStorage = "";
 }
 
 
