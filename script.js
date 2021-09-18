@@ -29,61 +29,81 @@ function operate(operator, a, b) {
     }
 }
 
-const display = document.querySelector("#display");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
-const equals = document.querySelector("#equals");
-const output = document.querySelector("#output");
-const opDisplay = document.querySelector("#op-display");
+const displayValue = document.querySelector("#display");
 
-let displayValue = "";
-let storedValue = "";
-let action = "";
-let result;
 
-function numberListener() {
-    numbers.forEach(number => {
-        number.addEventListener('click', number => {
-            displayValue += number.target.textContent;
-            // getKey(number);
-            changeDisplay();
-        })
-    })
+numbers.forEach(number => {
+    number.addEventListener('click', number => getInput(number));
+});
+
+operators.forEach(operator => {
+    operator.addEventListener('click', operator => getInput(operator));
+});
+
+function getInput(key) {
+    displayValue.textContent += `${key.target.textContent}`;
 }
 
-function operatorListener() {
-    operators.forEach(operator => {
-        operator.addEventListener('click', operator => {
-            action = operator.target.textContent;
-            storeNumber();
-            changeDisplay();
-        })
-    })
-}
 
-function storeNumber() {
-    storedValue = displayValue;
-    displayValue = "";
-}
+// const display = document.querySelector("#display");
+// const numbers = document.querySelectorAll(".number");
+// const operators = document.querySelectorAll(".operator");
+// const equals = document.querySelector("#equals");
+// const output = document.querySelector("#output");
 
-// function getKey(input) {
-    
-//     changeDisplay();
+// let displayValue = "";
+// let storedValue = "";
+// let storedFirstValue = "";
+// let action = "";
+// let result;
+
+// function numberListener() {
+//     numbers.forEach(number => {
+//         number.addEventListener('click', number => {
+//             displayValue += number.target.textContent;
+//             changeDisplay();
+//         })
+//     })
 // }
 
-function changeDisplay() {
-    display.textContent = displayValue;
-    opDisplay.textContent = action;
-    output.textContent = result;
-}
+// function operatorListener() {
+//     operators.forEach(operator => {
+//         operator.addEventListener('click', operator => {
+//             action = operator.target.textContent;
+//             storeNumber();
+//             changeDisplay();
+//         })
+//     })
+// }
 
-numberListener();
-operatorListener();
+// function storeNumber() {
+//     if(storedFirstValue === "") {
+//         storedFirstValue = displayValue;
+//         displayValue = "";
+//     } else {
+//         storedValue = displayValue;
+//     }
 
-equals.addEventListener('click', () => {
-    result = operate(action, storedValue, displayValue);
-    storedValue = "";
-    displayValue = "";
-    action = "";
-    changeDisplay();
-});
+// }
+
+// function changeDisplay() {
+//     display.textContent = displayValue;
+//     display.textContent += action;
+//     output.textContent = result;
+// }
+
+// numberListener();
+// operatorListener();
+
+// equals.addEventListener('click', () => {
+//     storeNumber();
+//     console.log(`${storedFirstValue} and ${storedValue}`);
+//     result = operate(action, storedFirstValue, storedValue);
+//     storedValue = "";
+//     storedFirstValue = "";
+//     displayValue = "";
+//     action = "";
+//     changeDisplay();
+// });
