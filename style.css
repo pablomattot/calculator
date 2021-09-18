@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+/* GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Spartan', sans-serif;
+    font-size: 24px;
+}
+
+body {
+    background-color: #e3f0ff;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CALCULATOR */
+/* CALC BODY */
+.calculator {
+    background-color: #3A4764;
+    border: 3px solid #FFF;
+    border-radius: 20px;
+    height: 90vw;
+    width: 70vw;
+    max-height: 500px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.screen {
+    background-color: #182034;
+    border-radius: 10px;
+    width: 90%;
+    height: 20%;
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 20px;
+}
+
+.keyboard {
+    padding: 20px;
+    background-color: #232c43;
+    border-radius: 10px;
+    width: 90%;
+    height: 70%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+/* KEYS */
+button {
+    border: none;
+    background-color: #eae3dc;
+    border-radius: 10px;
+    box-shadow: 0 0 0px 2px #b4a597;
+    color: #444b5a;
+}
+
+.double-col {
+    grid-column: span 2;
+}
+
+.red {
+    background-color: #d03f2f;
+    box-shadow: 0 0 0px 2px #93261a;
+    color: #FFF;
+}
+
+.special {
+    background-color: #637097;
+    box-shadow: 0 0 0px 2px #404e72;
+    color: #FFF;
+}
