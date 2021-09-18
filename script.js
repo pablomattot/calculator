@@ -16,7 +16,7 @@ function divide(a, b) {
 
 function operate(operator, a, b) {
     a = Number(a);
-    b = Number(b)
+    b = Number(b);
     switch (operator) {
         case '+':
             return add(a, b);
@@ -30,22 +30,55 @@ function operate(operator, a, b) {
 }
 
 const screenInput = document.querySelector("#input");
-const keyboard = document.querySelector(".keyboard");
-const keys = Array.from(keyboard.children);
+const numbers = document.querySelectorAll(".number");
+const operators = document.querySelectorAll(".operator");
+const equals = document.querySelector("#equals");
+const output = document.querySelector("#output");
 
 let displayValue = "";
+let storedValue = "";
+let action = "";
+let result;
 
-keys.forEach(key => {
-    key.addEventListener('click', key => {
-        getKey(key)
-        changeDisplay();
+function numberListener() {
+    numbers.forEach(number => {
+        number.addEventListener('click', number => {
+            getKey(number);
+        })
     })
-})
+}
 
-function getKey(key) {
-    displayValue += key.target.textContent;
+function operatorListener() {
+    operators.forEach(operator => {
+        operator.addEventListener('click', operator => {
+            action = operator.target.textContent;
+            storeNumber();
+        })
+    })
+}
+
+function storeNumber() {
+    storedValue = displayValue;
+    displayValue = "";
+}
+
+function getKey(input) {
+    displayValue += input.target.textContent;
+    changeDisplay();
 }
 
 function changeDisplay() {
     screenInput.textContent = displayValue;
+    output.textContent = result;
 }
+
+numberListener();
+operatorListener();
+
+equals.addEventListener('click', () => {
+    result = operate(action, storedValue, displayValue);
+    storedValue = "";
+    displayValue = "";
+    action = "";
+    changeDisplay();
+});
