@@ -33,10 +33,13 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const displayValue = document.querySelector("#display");
 const process = document.querySelector("#equals");
+const outputDisplay = document.querySelector("#output");
+const reset = document.querySelector("#reset")
 
 let action = "";
 let temporaryStorage = "";
 let numberArray = [];
+let result;
 
 
 numbers.forEach(number => {
@@ -49,6 +52,7 @@ numbers.forEach(number => {
 operators.forEach(operator => {
     operator.addEventListener('click', operator => {
         getInput(operator);
+        action = operator.target.textContent;
         storeNumber();
     });
 });
@@ -59,19 +63,35 @@ function getInput(key) {
 
 function storeNumber() {
     numberArray.push(temporaryStorage);
-    clear(temporaryStorage);
+    temporaryStorage = "";
 }
 
 process.addEventListener('click', () => {
     storeNumber();
+
+    let a = numberArray[0];
+    let b = numberArray[1];
+
+    result = operate(action,a,b);
+    updateDisplay();
+
+    action = "";
+
 });
 
-function clear(input) {
-    if(input) {
-        return input = "";
-    } else {
-        return input.splice(0, input.length);
-    }
+function updateDisplay() {
+    outputDisplay.textContent = `${result}`;
+}
+
+reset.addEventListener('click', clearAll);
+
+function clearAll() {
+    temporaryStorage = "";
+    numberArray.splice(0, numberArray.length);
+    action = "";
+    result = null;
+    displayValue.textContent = "";
+    outputDisplay.textContent = "";
 }
 
 
