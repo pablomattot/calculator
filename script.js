@@ -29,11 +29,12 @@ function operate(operator, a, b) {
     }
 }
 
-const screenInput = document.querySelector("#input");
+const display = document.querySelector("#display");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equals = document.querySelector("#equals");
 const output = document.querySelector("#output");
+const opDisplay = document.querySelector("#op-display");
 
 let displayValue = "";
 let storedValue = "";
@@ -43,7 +44,9 @@ let result;
 function numberListener() {
     numbers.forEach(number => {
         number.addEventListener('click', number => {
-            getKey(number);
+            displayValue += number.target.textContent;
+            // getKey(number);
+            changeDisplay();
         })
     })
 }
@@ -53,6 +56,7 @@ function operatorListener() {
         operator.addEventListener('click', operator => {
             action = operator.target.textContent;
             storeNumber();
+            changeDisplay();
         })
     })
 }
@@ -62,13 +66,14 @@ function storeNumber() {
     displayValue = "";
 }
 
-function getKey(input) {
-    displayValue += input.target.textContent;
-    changeDisplay();
-}
+// function getKey(input) {
+    
+//     changeDisplay();
+// }
 
 function changeDisplay() {
-    screenInput.textContent = displayValue;
+    display.textContent = displayValue;
+    opDisplay.textContent = action;
     output.textContent = result;
 }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +8,16 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <main>
         <div class="calculator">
             <div class="screen">
-                <span id="input"></span>
+                <span class="history">
+                    <span id="display"></span>
+                    <span id="op-display"></span>
+                </span>
                 <span id="output"></span>
             </div>
             <div class="keyboard">
@@ -37,7 +42,8 @@
             </div>
         </div>
     </main>
-    
+
     <script src="script.js"></script>
 </body>
+
 </html>
