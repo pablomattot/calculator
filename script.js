@@ -51,6 +51,10 @@ numbers.forEach(number => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', operator => {
+        if(action) {
+            calculate();
+        }
+
         getInput(operator);
         action = operator.target.textContent;
         storeNumber();
@@ -67,6 +71,10 @@ function storeNumber() {
 }
 
 process.addEventListener('click', () => {
+    calculate();
+});
+
+function calculate() {
     storeNumber();
 
     let a = numberArray[0];
@@ -78,11 +86,11 @@ process.addEventListener('click', () => {
     temporaryStorage = result;
     action = "";
     numberArray.splice(0, numberArray.length);
-
-});
+}
 
 function updateDisplay() {
     outputDisplay.textContent = `${result}`;
+    displayValue.textContent = "";
 }
 
 reset.addEventListener('click', clearAll);
@@ -95,65 +103,3 @@ function clearAll() {
     displayValue.textContent = "";
     outputDisplay.textContent = "";
 }
-
-
-// const display = document.querySelector("#display");
-// const numbers = document.querySelectorAll(".number");
-// const operators = document.querySelectorAll(".operator");
-// const equals = document.querySelector("#equals");
-// const output = document.querySelector("#output");
-
-// let displayValue = "";
-// let storedValue = "";
-// let storedFirstValue = "";
-// let action = "";
-// let result;
-
-// function numberListener() {
-//     numbers.forEach(number => {
-//         number.addEventListener('click', number => {
-//             displayValue += number.target.textContent;
-//             changeDisplay();
-//         })
-//     })
-// }
-
-// function operatorListener() {
-//     operators.forEach(operator => {
-//         operator.addEventListener('click', operator => {
-//             action = operator.target.textContent;
-//             storeNumber();
-//             changeDisplay();
-//         })
-//     })
-// }
-
-// function storeNumber() {
-//     if(storedFirstValue === "") {
-//         storedFirstValue = displayValue;
-//         displayValue = "";
-//     } else {
-//         storedValue = displayValue;
-//     }
-
-// }
-
-// function changeDisplay() {
-//     display.textContent = displayValue;
-//     display.textContent += action;
-//     output.textContent = result;
-// }
-
-// numberListener();
-// operatorListener();
-
-// equals.addEventListener('click', () => {
-//     storeNumber();
-//     console.log(`${storedFirstValue} and ${storedValue}`);
-//     result = operate(action, storedFirstValue, storedValue);
-//     storedValue = "";
-//     storedFirstValue = "";
-//     displayValue = "";
-//     action = "";
-//     changeDisplay();
-// });

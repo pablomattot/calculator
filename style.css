@@ -48,6 +48,7 @@ main {
     justify-content: center;
     gap: 5px;
     padding: 0 20px;
+    overflow: hidden;
 }
 
 .keyboard {
