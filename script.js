@@ -48,6 +48,7 @@ let result;
 // Store the number in the temporary storage variable send it to getInput
 numbers.forEach(number => {
     number.addEventListener('click', number => {
+        if(result) {result = null;temporaryStorage = "0";}
         if (number.target.textContent === ".") {
             if (temporaryStorage.includes(".")) {
                 console.log("already decimal");
@@ -59,7 +60,7 @@ numbers.forEach(number => {
             getInput(number);
             temporaryStorage += number.target.textContent;
         }
-    });
+    })
 });
 
 // Add an eventlistener to each operator
