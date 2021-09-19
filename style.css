@@ -71,6 +71,10 @@ button {
     color: #444b5a;
 }
 
+button:active {
+    box-shadow: 0 0 0px 2px #444b5a;
+}
+
 .double-col {
     grid-column: span 2;
 }
