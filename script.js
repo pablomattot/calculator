@@ -41,17 +41,25 @@ let temporaryStorage = "0";
 let numberArray = [];
 let result;
 
-
 numbers.forEach(number => {
     number.addEventListener('click', number => {
-        getInput(number);
-        temporaryStorage += number.target.textContent;
+        if (number.target.textContent === ".") {
+            if (temporaryStorage.includes(".")) {
+                console.log("already decimal");
+            } else {
+                getInput(number);
+                temporaryStorage += number.target.textContent;
+            }
+        } else {
+            getInput(number);
+            temporaryStorage += number.target.textContent;
+        }
     });
 });
 
 operators.forEach(operator => {
     operator.addEventListener('click', operator => {
-        if(action) {
+        if (action) {
             calculate();
         }
 
@@ -71,9 +79,9 @@ function storeNumber() {
 }
 
 process.addEventListener('click', () => {
-    if(numberArray[0] && action && temporaryStorage) {
+    if (numberArray[0] && action && temporaryStorage) {
         calculate();
-    } else {console.log("insert numbers and operator first")}
+    } else { console.log("insert numbers and operator first") }
 });
 
 function calculate() {
