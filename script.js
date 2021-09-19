@@ -72,10 +72,12 @@ process.addEventListener('click', () => {
     let a = numberArray[0];
     let b = numberArray[1];
 
-    result = operate(action,a,b);
+    result = operate(action, a, b);
     updateDisplay();
 
+    temporaryStorage = result;
     action = "";
+    numberArray.splice(0, numberArray.length);
 
 });
 
