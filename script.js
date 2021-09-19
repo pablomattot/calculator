@@ -37,7 +37,7 @@ const outputDisplay = document.querySelector("#output");
 const reset = document.querySelector("#reset")
 
 let action = "";
-let temporaryStorage = "";
+let temporaryStorage = "0";
 let numberArray = [];
 let result;
 
@@ -71,7 +71,9 @@ function storeNumber() {
 }
 
 process.addEventListener('click', () => {
-    calculate();
+    if(numberArray[0] && action && temporaryStorage) {
+        calculate();
+    } else {console.log("insert numbers and operator first")}
 });
 
 function calculate() {
@@ -96,7 +98,7 @@ function updateDisplay() {
 reset.addEventListener('click', clearAll);
 
 function clearAll() {
-    temporaryStorage = "";
+    temporaryStorage = "0";
     numberArray.splice(0, numberArray.length);
     action = "";
     result = null;
