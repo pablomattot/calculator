@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
-
 /* GENERAL */
+
 * {
     margin: 0;
     padding: 0;
@@ -21,7 +21,9 @@ main {
 }
 
 /* CALCULATOR */
+
 /* CALC BODY */
+
 .calculator {
     background-color: #3A4764;
     border: 3px solid #FFF;
@@ -63,6 +65,7 @@ main {
 }
 
 /* KEYS */
+
 button {
     border: none;
     background-color: #eae3dc;
@@ -89,4 +92,20 @@ button:active {
     background-color: #637097;
     box-shadow: 0 0 0px 2px #404e72;
     color: #FFF;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 375px) {
+    .calculator {
+        height: 95vw;
+    }
+
+    .keyboard {
+        padding: 10px;
+    }
+
+    .special {
+        font-size: 20px;
+    }
 }

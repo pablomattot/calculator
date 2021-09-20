@@ -46,29 +46,10 @@ keysArray.forEach(key => {
     key.addEventListener('click', (key) => {
         keyDown = false;
         if (key.target.classList.contains("number")) {
-            // // If a result is already present, clear everything.
-            // // User can start new expression without clicking RESET
-            // if (result) { clearAll(); }
-            // // If the number already is a decimal, stop user from adding more '.'
-            // if (!checkDecimal(key)) {
-            //     temporaryStorage += getInput(key);
-            //     updateDisplay(key);
-            // }
             selectNumber(key);
         } else if (key.target.classList.contains("operator")) {
-            // Only allow operators if a number is already present
-            // if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
-            //     operator = getInput(key);
-            //     storeNumber();
-            //     result = null;
-            //     updateDisplay(key);
-            // } else { console.log("Enter a number first") }
             selectOperator(key);
         } else if (key.target.id === "equals") {
-            // if (numberArray[0]) {
-            //     calculateExpression();
-            //     updateDisplay(key);
-            // }
             selectEquals(key);
         } else if (key.target.id === "reset") {
             clearAll();
