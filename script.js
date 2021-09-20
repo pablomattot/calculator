@@ -54,7 +54,7 @@ keysArray.forEach(key => {
             }
         } else if (key.target.classList.contains("operator")) {
             // Only allow operators if a number is already present
-            if (numberArray[0] || temporaryStorage) {
+            if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
                 operator = getInput(key);
                 storeNumber();
                 result = null;
@@ -88,7 +88,7 @@ function updateDisplay(key) {
     } else {
         console.log("not a number or operator");
     }
-    if (result) {
+    if (result || result === 0) {
         outputDisplay.textContent = result;
     }
 }
@@ -110,6 +110,7 @@ function roundNumber(number) {
     return +number.toFixed(6);
 }
 
+// Check whether number is decimal
 function checkDecimal(key) {
     if (key.target.textContent === ".") {
         if (temporaryStorage.includes(".")) {
