@@ -46,27 +46,30 @@ keysArray.forEach(key => {
     key.addEventListener('click', (key) => {
         keyDown = false;
         if (key.target.classList.contains("number")) {
-            // If a result is already present, clear everything.
-            // User can start new expression without clicking RESET
-            if (result) { clearAll(); }
-            // If the number already is a decimal, stop user from adding more '.'
-            if (!checkDecimal(key)) {
-                temporaryStorage += getInput(key);
-                updateDisplay(key);
-            }
+            // // If a result is already present, clear everything.
+            // // User can start new expression without clicking RESET
+            // if (result) { clearAll(); }
+            // // If the number already is a decimal, stop user from adding more '.'
+            // if (!checkDecimal(key)) {
+            //     temporaryStorage += getInput(key);
+            //     updateDisplay(key);
+            // }
+            selectNumber(key);
         } else if (key.target.classList.contains("operator")) {
             // Only allow operators if a number is already present
-            if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
-                operator = getInput(key);
-                storeNumber();
-                result = null;
-                updateDisplay(key);
-            } else { console.log("Enter a number first") }
+            // if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
+            //     operator = getInput(key);
+            //     storeNumber();
+            //     result = null;
+            //     updateDisplay(key);
+            // } else { console.log("Enter a number first") }
+            selectOperator(key);
         } else if (key.target.id === "equals") {
-            if (numberArray[0]) {
-                calculateExpression();
-                updateDisplay(key);
-            }
+            // if (numberArray[0]) {
+            //     calculateExpression();
+            //     updateDisplay(key);
+            // }
+            selectEquals(key);
         } else if (key.target.id === "reset") {
             clearAll();
         }
@@ -137,27 +140,38 @@ function clearAll() {
 window.addEventListener('keydown', e => {
     keyDown = true;
     if (e.key >= 0 && e.key <= 9 || e.key === ".") {
-        // If a result is already present, clear everything.
-        // User can start new expression without clicking RESET
-        if (result) { clearAll(); }
-        // If the number already is a decimal, stop user from adding more '.'
-        if (!checkDecimal(e)) {
-            temporaryStorage += getInput(e);
-            updateDisplay(e);
-        }
+        selectNumber(e);
     } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
-        // Only allow operators if a number is already present
-        if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
-            operator = getInput(e);
-            console.log(e.key);
-            storeNumber();
-            result = null;
-            updateDisplay(e);
-        } else { console.log("Enter a number first") }
+        selectOperator(e);
     } else if (e.key === "Enter" || e.key === "=") {
-        if (numberArray[0]) {
-            calculateExpression();
-            updateDisplay(e);
-        }
+        selectEquals(e);
     }
 })
+
+function selectNumber(e) {
+    // If a result is already present, clear everything.
+    // User can start new expression without clicking RESET
+    if (result) { clearAll(); }
+    // If the number already is a decimal, stop user from adding more '.'
+    if (!checkDecimal(e)) {
+        temporaryStorage += getInput(e);
+        updateDisplay(e);
+    }
+}
+
+function selectOperator(e) {
+    // Only allow operators if a number is already present
+    if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
+        operator = getInput(e);
+        storeNumber();
+        result = null;
+        updateDisplay(e);
+    } else { console.log("Enter a number first") }
+}
+
+function selectEquals(e) {
+    if (numberArray[0]) {
+        calculateExpression();
+        updateDisplay(e);
+    }
+}

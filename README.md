@@ -19,4 +19,4 @@ It can also calculate using decimals and has buttons to either clear the last nu
 - [x] Don't allow user to press = before entering numbers or picking an operator
 - [x] Option to clear all existing data
 - [ ] Add Delete button functionality
-- [ ] Add Keyboard support
+- [x] Add Keyboard support
