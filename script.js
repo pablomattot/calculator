@@ -39,10 +39,12 @@ let temporaryStorage = "";
 let numberArray = [];
 let operator = "";
 let result;
+let keyDown = false;
 
 // Link functions to correct keys
 keysArray.forEach(key => {
     key.addEventListener('click', (key) => {
+        keyDown = false;
         if (key.target.classList.contains("number")) {
             // If a result is already present, clear everything.
             // User can start new expression without clicking RESET
@@ -59,10 +61,12 @@ keysArray.forEach(key => {
                 storeNumber();
                 result = null;
                 updateDisplay(key);
-            } else {console.log("Enter a number first")}
+            } else { console.log("Enter a number first") }
         } else if (key.target.id === "equals") {
-            calculateExpression();
-            updateDisplay(key);
+            if (numberArray[0]) {
+                calculateExpression();
+                updateDisplay(key);
+            }
         } else if (key.target.id === "reset") {
             clearAll();
         }
@@ -71,7 +75,8 @@ keysArray.forEach(key => {
 
 // Get input
 function getInput(key) {
-    return key.target.textContent;
+    return keyDown ? key.key : key.target.textContent;
+    // return key.target.textContent;
 }
 
 // Store first number
@@ -82,11 +87,10 @@ function storeNumber() {
 
 // Display input/output
 function updateDisplay(key) {
-    if (key.target.classList.contains("number") || key.target.classList.contains("operator")) {
-        inputDisplay.textContent += getInput(key);
-
+    if (key.target.id === "equals" || key.target.id === "reset" || key.key === "Enter" || key.key === "=") {
+        console.log("test");
     } else {
-        console.log("not a number or operator");
+        inputDisplay.textContent += getInput(key);
     }
     if (result || result === 0) {
         outputDisplay.textContent = result;
@@ -112,7 +116,7 @@ function roundNumber(number) {
 
 // Check whether number is decimal
 function checkDecimal(key) {
-    if (key.target.textContent === ".") {
+    if (key.target.textContent === "." || key.key === ".") {
         if (temporaryStorage.includes(".")) {
             console.log("already decimal");
             return true;
@@ -128,3 +132,32 @@ function clearAll() {
     inputDisplay.textContent = "";
     outputDisplay.textContent = "";
 }
+
+// Keyboard support
+window.addEventListener('keydown', e => {
+    keyDown = true;
+    if (e.key >= 0 && e.key <= 9 || e.key === ".") {
+        // If a result is already present, clear everything.
+        // User can start new expression without clicking RESET
+        if (result) { clearAll(); }
+        // If the number already is a decimal, stop user from adding more '.'
+        if (!checkDecimal(e)) {
+            temporaryStorage += getInput(e);
+            updateDisplay(e);
+        }
+    } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
+        // Only allow operators if a number is already present
+        if (numberArray[0] || temporaryStorage || temporaryStorage === 0) {
+            operator = getInput(e);
+            console.log(e.key);
+            storeNumber();
+            result = null;
+            updateDisplay(e);
+        } else { console.log("Enter a number first") }
+    } else if (e.key === "Enter" || e.key === "=") {
+        if (numberArray[0]) {
+            calculateExpression();
+            updateDisplay(e);
+        }
+    }
+})
